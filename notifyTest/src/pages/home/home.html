@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Schedule multiple</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h2>Welcome to Notification Scheduling Test!</h2>
+  <p>
+    Click the button below to generate some badass notifications based on fixed intervals.
+  </p>
+  <ion-item>
+    <ion-label color="primary">Interval</ion-label>
+    <ion-input placeholder="Interval between each noti in s" type="number" [value]="interval" [(ngModel)]="interval"></ion-input>
+  </ion-item>
+  <button ion-button (click)='scheduleNotification();'>SCHEDULE NOTIFICATIONS</button>
+  <button ion-button (click)='cancelNotification();'>CANCEL NOTIFICATIONS</button>
+  <p>
+    This schedules 10 notifications based on the current time and specified interval.
+    To schedule a single notification after a custom duration, go to Single tab
+  </p>
+
+<!--  <ion-card>
+  <ion-card-header>
+    Current Notifications
+  </ion-card-header>
+  <ion-card-content >
+    This area will display the set of notifications currently configured.
+    <li *ngFor="let item of notifyList">
+      {{item.id}}, {{item.text}}, {{item.trigger}}
+  </li>
+  </ion-card-content>
+</ion-card>-->
+</ion-content>

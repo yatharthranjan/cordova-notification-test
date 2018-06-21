@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Schedule Single
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <ion-label color="primary">Duration</ion-label>
+    <ion-input placeholder="Duration in s" type="number" [value]="duration" [(ngModel)]="duration"></ion-input>
+  </ion-item>
+  <button ion-button (click)='scheduleNotification();'>SCHEDULE NOTIFICATION</button>
+  <button ion-button (click)='isNotificationScheduled();'>isNotificationScheduled?</button>
+
+
+</ion-content>
