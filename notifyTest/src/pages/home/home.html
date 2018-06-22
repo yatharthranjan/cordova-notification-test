@@ -13,10 +13,14 @@
     <ion-label color="primary">Interval</ion-label>
     <ion-input placeholder="Interval between each noti in s" type="number" [value]="interval" [(ngModel)]="interval"></ion-input>
   </ion-item>
+  <ion-item>
+    <ion-label color="primary">Number of Times</ion-label>
+    <ion-input placeholder="Number of times before repeating" type="number" [value]="times" [(ngModel)]="times"></ion-input>
+  </ion-item>
   <button ion-button (click)='scheduleNotification();'>SCHEDULE NOTIFICATIONS</button>
   <button ion-button (click)='cancelNotification();'>CANCEL NOTIFICATIONS</button>
   <p>
-    This schedules 10 notifications based on the current time and specified interval.
+    This schedules repeating n number of notifications based on the current time and specified interval.
     To schedule a single notification after a custom duration, go to Single tab
   </p>
 
