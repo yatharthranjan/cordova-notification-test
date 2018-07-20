@@ -92,10 +92,6 @@ constructor(public navCtrl: NavController, private plt: Platform, alertCtrl: Ale
           this.fcmtoken = '' + token;
       });
 
-      FCMPlugin.onTokenRefresh()({
-
-      });
-
       // FCMPlugin.upstream({
       //   eventId: 'randomnew',
       //   action: 'SCHEDULE',
