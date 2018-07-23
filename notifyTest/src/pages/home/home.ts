@@ -15,7 +15,7 @@ declare var FCMPlugin;
 export class HomePage {
 interval: any;
 times: any;
-fcmtoken: any;
+//fcmtoken: any;
 constructor(public navCtrl: NavController, private plt: Platform, alertCtrl: AlertController) {
   this.plt.ready().then((readySource) => {
     (<any>cordova).plugins.notification.local.on('click').subscribe(notification => {
@@ -39,7 +39,23 @@ constructor(public navCtrl: NavController, private plt: Platform, alertCtrl: Ale
     });*/
   this.interval = 360;
   this.times = 100;
-  this.fcmtoken = '';
+  //this.fcmtoken = '';
+
+  console.log('trying to set sender ID');
+  FCMPlugin.setSenderId('1043784930865',
+   function() {
+      console.log('Set sender id success');
+  }, function(error) {
+    console.log(error);
+    alert(error)
+  });
+
+  console.log('trying to get FCM token');
+  FCMPlugin.getToken(function(token){
+      console.log('Token: ' + token);
+      alert(token);
+      //this.fcmtoken = '' + token;
+  });
 
 }
 
@@ -84,41 +100,10 @@ constructor(public navCtrl: NavController, private plt: Platform, alertCtrl: Ale
 
 
 
-    scheduleNotificationPush() {
-
-      FCMPlugin.getToken(function(token){
-          console.log('Token: ' + token);
-          alert(token);
-          this.fcmtoken = '' + token;
-      });
-
-      // FCMPlugin.upstream({
-      //   eventId: 'randomnew',
-      //   action: 'SCHEDULE',
-      //   notificationTitle:'Schedule id 1',
-      //   notificationMessage: 'hello',
-      //   time: new Date().getTime() + 60000,
-      //   subjectId: 'yatharth'
-      // }, function(succ) {
-      //   console.log(succ);
-      // }, function(err) {
-      //   console.log(err);
-      // });
-
+  scheduleNotificationPush() {
       var _i: number;
       for( _i = 0; _i < this.times; _i++) {
         var _id = _i + 1;
-        // Schedule delayed notification
-
-        // (<any>cordova).plugins.notification.local.schedule({
-        // id: _id,
-        // title: 'ID - ' + _id,
-        // text: this.interval / 60 + ' min notify',
-        // trigger: {at: new Date(new Date().getTime() + this.interval * _i * 1000)},
-        // led: 'FF0000',
-        // sound: null
-        // })
-
 
         FCMPlugin.upstream({
           eventId: uuid(),
@@ -127,7 +112,7 @@ constructor(public navCtrl: NavController, private plt: Platform, alertCtrl: Ale
           notificationMessage: this.interval * _id / 60 + ' min notify',
           time: new Date().getTime() + this.interval * _id * 1000,
           subjectId: 'yatharth',
-          expiry:
+          expiry: 60 * 10 * 1000
         }, function(succ) {
           console.log(succ);
         }, function(err) {
@@ -136,7 +121,7 @@ constructor(public navCtrl: NavController, private plt: Platform, alertCtrl: Ale
       }
     }
 
-    cancelNotificationPush() {
+  cancelNotificationPush() {
       FCMPlugin.upstream({
         eventId: uuid(),
         action: 'CANCEL',
